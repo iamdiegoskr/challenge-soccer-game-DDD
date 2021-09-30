@@ -63,5 +63,9 @@ public class SoccerGameChange extends EventChange {
             soccerGame.schedule = new Schedule(event.getScheduleId(),event.getHour(),event.getDate());
         });
 
+        apply((UpdatedGoalsGame event)->{
+            soccerGame.numberOfGoals = event.getNumberOfGoals();
+        });
+
     }
 }

@@ -21,6 +21,7 @@ public class SoccerGame extends AggregateEvent<SoccerGameIdentity> {
     protected Set<Referee> referees;
     protected Schedule schedule;
     protected Tournament tournament;
+    protected NumberOfGoals numberOfGoals;
 
 
     public SoccerGame(SoccerGameIdentity soccerGameIdentity, Tournament tournament) {
@@ -75,5 +76,9 @@ public class SoccerGame extends AggregateEvent<SoccerGameIdentity> {
         appendChange(new AddedSchedule(scheduleId,hour,date)).apply();
     }
 
+    public void updateGoalsSoccerGame(NumberOfGoals numberOfGoals){
+        Objects.requireNonNull(numberOfGoals);
+        appendChange(new UpdatedGoalsGame(numberOfGoals)).apply();
+    }
 
 }
