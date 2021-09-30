@@ -4,10 +4,7 @@ import co.com.sofka.domain.generic.EventChange;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Referee;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Stadium;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Team;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedReferee;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedStadium;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedTeam;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.SoccerGameCreated;
+import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.*;
 
 import java.util.HashSet;
 
@@ -49,14 +46,17 @@ public class SoccerGameChange extends EventChange {
             }
 
             soccerGame.referees.add(
-                    new Referee(event.getRefereeId(),event.getName())
+                    new Referee(event.getRefereeId(),event.getName(), event.getArbitrationCharge())
             );
 
         });
 
-        
 
-
+        apply((ReportGameGenerated event)-> soccerGame.referees.forEach(referee -> {
+            if(referee.getArbitrationCharge().equals("principal")){
+                referee.generateReportGame(event.getReportGame());
+            }
+        }));
 
     }
 }

@@ -7,10 +7,7 @@ import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Referee;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Schedule;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Stadium;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Team;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedReferee;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedStadium;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedTeam;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.SoccerGameCreated;
+import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.*;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.*;
 
 import java.util.List;
@@ -59,13 +56,17 @@ public class SoccerGame extends AggregateEvent<SoccerGameIdentity> {
         appendChange(new AddedTeam(teamId,name,city,numberOfPlayers)).apply();
     }
 
-    public void addReferees(RefereeIdentity refereeId, Name name){
+    public void addReferees(RefereeIdentity refereeId, Name name, ArbitrationCharge arbitrationCharge){
         Objects.requireNonNull(refereeId);
         Objects.requireNonNull(name);
-        appendChange(new AddedReferee(refereeId,name)).apply();
+        Objects.requireNonNull(arbitrationCharge);
+        appendChange(new AddedReferee(refereeId,name, arbitrationCharge)).apply();
     }
 
-
+    public void generateReportGame(ReportGame reportGame){
+        Objects.requireNonNull(reportGame);
+        appendChange(new ReportGameGenerated(reportGame)).apply();
+    }
 
 
 }
