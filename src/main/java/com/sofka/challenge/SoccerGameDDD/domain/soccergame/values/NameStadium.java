@@ -15,8 +15,8 @@ public class NameStadium implements ValueObject<String> {
             throw new IllegalArgumentException("El nombre del estadio no puede estar vacio");
         }
 
-        if(this.value.length()<10){
-            throw new IllegalArgumentException("El nombre del estadio debe contener mas de 10 caracteres");
+        if(this.value.length()<5){
+            throw new IllegalArgumentException("El nombre del estadio debe contener mas de 5 caracteres");
         }
 
         if(this.value.length()>100){
