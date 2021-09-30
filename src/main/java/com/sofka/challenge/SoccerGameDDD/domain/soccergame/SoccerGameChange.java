@@ -2,6 +2,7 @@ package com.sofka.challenge.SoccerGameDDD.domain.soccergame;
 
 import co.com.sofka.domain.generic.EventChange;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Referee;
+import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Schedule;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Stadium;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Team;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.*;
@@ -57,6 +58,10 @@ public class SoccerGameChange extends EventChange {
                 referee.generateReportGame(event.getReportGame());
             }
         }));
+
+        apply((AddedSchedule event)->{
+            soccerGame.schedule = new Schedule(event.getScheduleId(),event.getHour(),event.getDate());
+        });
 
     }
 }

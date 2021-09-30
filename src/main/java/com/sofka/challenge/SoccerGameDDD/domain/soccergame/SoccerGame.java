@@ -68,5 +68,12 @@ public class SoccerGame extends AggregateEvent<SoccerGameIdentity> {
         appendChange(new ReportGameGenerated(reportGame)).apply();
     }
 
+    public void addSchedule(ScheduleIdentity scheduleId, Hour hour, Date date){
+        Objects.requireNonNull(scheduleId);
+        Objects.requireNonNull(hour);
+        Objects.requireNonNull(date);
+        appendChange(new AddedSchedule(scheduleId,hour,date)).apply();
+    }
+
 
 }
