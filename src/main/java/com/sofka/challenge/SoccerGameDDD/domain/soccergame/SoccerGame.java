@@ -2,10 +2,12 @@ package com.sofka.challenge.SoccerGameDDD.domain.soccergame;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
+import com.sofka.challenge.SoccerGameDDD.domain.shared.values.Name;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Referee;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Schedule;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Stadium;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Team;
+import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedReferee;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedStadium;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedTeam;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.SoccerGameCreated;
@@ -55,6 +57,12 @@ public class SoccerGame extends AggregateEvent<SoccerGameIdentity> {
         Objects.requireNonNull(city);
         Objects.requireNonNull(numberOfPlayers);
         appendChange(new AddedTeam(teamId,name,city,numberOfPlayers)).apply();
+    }
+
+    public void addReferees(RefereeIdentity refereeId, Name name){
+        Objects.requireNonNull(refereeId);
+        Objects.requireNonNull(name);
+        appendChange(new AddedReferee(refereeId,name)).apply();
     }
 
 
