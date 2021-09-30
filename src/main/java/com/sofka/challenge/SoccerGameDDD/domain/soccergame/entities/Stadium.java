@@ -10,9 +10,10 @@ import java.util.Objects;
 
 public class Stadium extends Entity<StadiumIdentity> {
 
-    private NameStadium name;
+    private final NameStadium name;
+    private final Location location;
     private Capacity capacity;
-    private Location location;
+
 
     public Stadium(StadiumIdentity stadiumIdentity, NameStadium name, Capacity capacity, Location location) {
         super(stadiumIdentity);
@@ -21,20 +22,9 @@ public class Stadium extends Entity<StadiumIdentity> {
         this.location = location;
     }
 
-   //Comportamientos de la entidad.
-
-    public void updateNameStadium(NameStadium name){
-        this.name = Objects.requireNonNull(name);
-    }
-
-    public void updateLocationStadium(Location location){
-        this.location = Objects.requireNonNull(location);
-    }
-
-    public void updateCapacity(Capacity capacity){
+    public void UpdateStadiumCapacity(Capacity capacity){
         this.capacity = Objects.requireNonNull(capacity);
     }
-
 
     public NameStadium name() {
         return name;
