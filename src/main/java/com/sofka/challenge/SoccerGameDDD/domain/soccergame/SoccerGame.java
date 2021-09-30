@@ -57,7 +57,7 @@ public class SoccerGame extends AggregateEvent<SoccerGameIdentity> {
         appendChange(new AddedTeam(teamId,name,city,numberOfPlayers)).apply();
     }
 
-    public void addReferees(RefereeIdentity refereeId, Name name, ArbitrationCharge arbitrationCharge){
+    public void addReferee(RefereeIdentity refereeId, Name name, ArbitrationCharge arbitrationCharge){
         Objects.requireNonNull(refereeId);
         Objects.requireNonNull(name);
         Objects.requireNonNull(arbitrationCharge);
