@@ -4,27 +4,17 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-public class NameStadium implements ValueObject<String> {
+public class Date implements ValueObject<String> {
 
     private final String value;
 
-    public NameStadium(String value) {
+    public Date(String value) {
         this.value = Objects.requireNonNull(value);
 
         if(this.value.isBlank()){
-            throw new IllegalArgumentException("El nombre del estadio no puede estar vacio");
+            throw new IllegalArgumentException("La fecha no puede estar vacia");
         }
-
-        if(this.value.length()<10){
-            throw new IllegalArgumentException("El nombre del estadio debe contener mas de 10 caracteres");
-        }
-
-        if(this.value.length()>100){
-            throw new IllegalArgumentException("El nombre del estadio no puede superar los 100 caracteres");
-        }
-
     }
-
 
     @Override
     public String value() {
@@ -35,8 +25,8 @@ public class NameStadium implements ValueObject<String> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        NameStadium that = (NameStadium) o;
-        return Objects.equals(value, that.value);
+        Date date = (Date) o;
+        return Objects.equals(value, date.value);
     }
 
     @Override
