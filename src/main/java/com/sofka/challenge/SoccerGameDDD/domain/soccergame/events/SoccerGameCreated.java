@@ -6,7 +6,6 @@ import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.Tournament;
 
 public class SoccerGameCreated extends DomainEvent {
 
-
     private final SoccerGameIdentity soccerGameIdentity;
     private final Tournament tournament;
 
