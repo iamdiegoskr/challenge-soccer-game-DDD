@@ -4,43 +4,65 @@ import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-public class ReportGame implements ValueObject<String> {
+public class ReportGame implements ValueObject<ReportGame.Props> {
 
-    private final String value;
+    private final Integer playersRedCard;
+    private final Integer playersYellowCard;
+    private final String analysis;
+    private final String date;
 
-    public ReportGame(String value) {
-        this.value = Objects.requireNonNull(value);
+    public ReportGame(Integer playersRedCard, Integer playersYellowCard, String analysis, String date) {
+        this.playersRedCard = Objects.requireNonNull(playersRedCard);
+        this.playersYellowCard = Objects.requireNonNull(playersYellowCard);
+        this.analysis = Objects.requireNonNull(analysis);
+        this.date = Objects.requireNonNull(date);
 
-        if(this.value.isBlank()){
-            throw new IllegalArgumentException("El informe no puede estar vacio");
+        if(this.playersRedCard<0 || this.playersYellowCard<0){
+            throw new IllegalArgumentException("Ingrese un valor valido para las tarjetas");
         }
 
-        if(this.value.length()<50){
-            throw new IllegalArgumentException("El informe es demasido corto");
+        if(this.analysis.isBlank()){
+            throw new IllegalArgumentException("EL analisis del partido no puede estar vacio");
         }
 
-        if(this.value.length()>1000){
-            throw new IllegalArgumentException("El informe es demasido largo");
+        if(this.date.isBlank()){
+            throw new IllegalArgumentException("La fecha del reporte no puede estar vacia");
         }
 
     }
 
 
     @Override
-    public String value() {
-        return value;
+    public Props value() {
+        return new Props() {
+            @Override
+            public Integer playersRedCard() {
+                return playersRedCard;
+            }
+
+            @Override
+            public Integer playersYellowCard() {
+                return playersYellowCard;
+            }
+
+            @Override
+            public String analysis() {
+                return analysis;
+            }
+
+            @Override
+            public String date() {
+                return date;
+            }
+        };
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ReportGame that = (ReportGame) o;
-        return Objects.equals(value, that.value);
+    public interface Props{
+        Integer playersRedCard();
+        Integer playersYellowCard();
+        String analysis();
+        String date();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
+
 }
