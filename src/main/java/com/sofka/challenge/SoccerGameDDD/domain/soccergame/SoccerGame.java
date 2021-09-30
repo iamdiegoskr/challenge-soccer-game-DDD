@@ -7,6 +7,7 @@ import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Schedule;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Stadium;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Team;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedStadium;
+import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedTeam;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.SoccerGameCreated;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.*;
 
@@ -46,6 +47,14 @@ public class SoccerGame extends AggregateEvent<SoccerGameIdentity> {
         Objects.requireNonNull(capacity);
         Objects.requireNonNull(location);
         appendChange(new AddedStadium(stadiumId,name,capacity,location)).apply();
+    }
+
+    public void addTeam(TeamIdentity teamId, NameTeam name, City city, NumberOfPlayers numberOfPlayers ){
+        Objects.requireNonNull(teamId);
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(city);
+        Objects.requireNonNull(numberOfPlayers);
+        appendChange(new AddedTeam(teamId,name,city,numberOfPlayers)).apply();
     }
 
 
