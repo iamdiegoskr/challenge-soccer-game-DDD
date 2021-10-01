@@ -1,15 +1,16 @@
-package com.sofka.challenge.SoccerGameDDD.usecase;
+package com.sofka.challenge.SoccerGameDDD.usecase.soccergame;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
-import com.sofka.challenge.SoccerGameDDD.domain.shared.values.Name;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.commands.AddReferee;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedReferee;
+import com.sofka.challenge.SoccerGameDDD.domain.soccergame.commands.AddTeam;
+import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedTeam;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.SoccerGameCreated;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.*;
+import com.sofka.challenge.SoccerGameDDD.usecase.soccergame.AssignTeamUseCase;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -18,32 +19,32 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-
-
 @ExtendWith(MockitoExtension.class)
-class AssignRefereeUseCaseTest {
+class AssignTeamUseCaseTest {
 
     @Mock
     private DomainEventRepository repository;
 
     @Test
-    void associateReferee(){
+    @DisplayName("Validar que se le asigne un equipo a un partido de futbol")
+    void associateTeam(){
 
         var soccerGameID = SoccerGameIdentity.of("xxx");
-        var nameTournament = new Tournament("Liga de francia");
+        var nameTournament = new Tournament("Liga colombiana");
+        var teamIdentity =  TeamIdentity.of("yyy");
+        var nameTeam = new NameTeam("Atletico nacional");
+        var cityTeam = new City("Medellin");
+        var numberPlayerOfTeam = new NumberOfPlayers(25);
 
-        var refereeIdentity =  RefereeIdentity.of("yyy");
-        var nameReferee = new Name("Juan Diego");
-        var arbitrationCharge = new ArbitrationCharge("arbitro principal");
-
-        var command = new AddReferee(
+        var command = new AddTeam(
                 soccerGameID,
-                refereeIdentity,
-                nameReferee,
-                arbitrationCharge
+                teamIdentity,
+                nameTeam,
+                cityTeam,
+                numberPlayerOfTeam
         );
 
-        var useCase = new AssignRefereeUseCase();
+        var useCase = new AssignTeamUseCase();
 
         Mockito.when(repository.getEventsBy(soccerGameID.value())).thenReturn(eventStored(soccerGameID,nameTournament));
         useCase.addRepository(repository);
@@ -54,11 +55,13 @@ class AssignRefereeUseCaseTest {
                 .orElseThrow()
                 .getDomainEvents();
 
-        var event = (AddedReferee) events.get(0);
+        var event = (AddedTeam) events.get(0);
 
         Assertions.assertEquals("xxx", event.aggregateRootId());
-        Assertions.assertEquals("Juan Diego", event.getName().value());
-        Assertions.assertEquals("arbitro principal", event.getArbitrationCharge().value());
+        Assertions.assertEquals("Atletico nacional", event.getNameTeam().value());
+        Assertions.assertEquals("Medellin", event.getCity().value());
+        Assertions.assertEquals(25, event.getNumberOfPlayers().value());
+        Mockito.verify(repository).getEventsBy(soccerGameID.value());
     }
 
     private List<DomainEvent> eventStored(SoccerGameIdentity soccerGameId, Tournament tournament) {
@@ -67,6 +70,5 @@ class AssignRefereeUseCaseTest {
                 new SoccerGameCreated(soccerGameId,tournament)
         );
     }
-
 
 }

@@ -1,12 +1,12 @@
-package com.sofka.challenge.SoccerGameDDD.usecase;
+package com.sofka.challenge.SoccerGameDDD.usecase.soccergame;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.SoccerGame;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.commands.CreateSoccerGame;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.SoccerGameCreated;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.SoccerGameIdentity;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.Tournament;
+import com.sofka.challenge.SoccerGameDDD.usecase.soccergame.CreateSoccerGameUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

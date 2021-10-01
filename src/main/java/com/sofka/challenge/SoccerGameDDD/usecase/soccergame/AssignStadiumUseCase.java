@@ -1,25 +1,26 @@
-package com.sofka.challenge.SoccerGameDDD.usecase;
+package com.sofka.challenge.SoccerGameDDD.usecase.soccergame;
 
 import co.com.sofka.business.generic.BusinessException;
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.ResponseEvents;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.SoccerGame;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.commands.AddTeam;
+import com.sofka.challenge.SoccerGameDDD.domain.soccergame.commands.AddStadium;
 
-public class AssignTeamUseCase extends UseCase<RequestCommand<AddTeam>, ResponseEvents> {
+
+public class AssignStadiumUseCase extends UseCase<RequestCommand<AddStadium>, ResponseEvents> {
+
+    //Associate stadium to game
 
     @Override
-    public void executeUseCase(RequestCommand<AddTeam> addTeamRequestCommand) {
+    public void executeUseCase(RequestCommand<AddStadium> addStadiumRequestCommand) {
 
-        var command = addTeamRequestCommand.getCommand();
+        var command = addStadiumRequestCommand.getCommand();
         var soccerGame = SoccerGame.from(command.getSoccerGameId(), retrieveEvents());
 
         try{
-            soccerGame.addTeam(command.getTeamId(),
-                    command.getName(), command.getCity(),command.getNumberOfPlayers());
+            soccerGame.addStadium(command.getStadiumId(), command.getName(), command.getCapacity(), command.getLocation());
             emit().onResponse(new ResponseEvents(soccerGame.getUncommittedChanges()));
-
         }catch(RuntimeException e){
             emit().onError(new BusinessException(soccerGame.identity().value(), e.getMessage()));
         }

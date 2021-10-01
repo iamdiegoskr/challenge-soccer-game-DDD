@@ -1,4 +1,4 @@
-package com.sofka.challenge.SoccerGameDDD.usecase;
+package com.sofka.challenge.SoccerGameDDD.usecase.soccergame;
 
 import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;

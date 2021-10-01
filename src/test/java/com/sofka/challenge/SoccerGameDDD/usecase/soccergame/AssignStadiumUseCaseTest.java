@@ -1,4 +1,4 @@
-package com.sofka.challenge.SoccerGameDDD.usecase;
+package com.sofka.challenge.SoccerGameDDD.usecase.soccergame;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
@@ -8,7 +8,9 @@ import com.sofka.challenge.SoccerGameDDD.domain.soccergame.commands.AddStadium;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedStadium;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.SoccerGameCreated;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.*;
+import com.sofka.challenge.SoccerGameDDD.usecase.soccergame.AssignStadiumUseCase;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -24,6 +26,7 @@ class AssignStadiumUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
+    @DisplayName("Validar que se le asigne un estadio a un partido de futbol")
     void associateStadium(){
 
         var soccerGameID = SoccerGameIdentity.of("xxx");
@@ -60,6 +63,7 @@ class AssignStadiumUseCaseTest {
         Assertions.assertEquals("Calle 22", event.getLocation().value().street());
         Assertions.assertEquals("Barcelona", event.getLocation().value().city());
         Assertions.assertEquals("España", event.getLocation().value().country());
+        Mockito.verify(repository).getEventsBy(soccerGameID.value());
 
     }
 

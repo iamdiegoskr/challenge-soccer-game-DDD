@@ -1,4 +1,4 @@
-package com.sofka.challenge.SoccerGameDDD.usecase;
+package com.sofka.challenge.SoccerGameDDD.usecase.soccergame;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
@@ -9,7 +9,9 @@ import com.sofka.challenge.SoccerGameDDD.domain.soccergame.commands.AddSchedule;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedSchedule;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.SoccerGameCreated;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.*;
+import com.sofka.challenge.SoccerGameDDD.usecase.soccergame.AssignScheduleUseCase;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -27,6 +29,7 @@ class AssignScheduleUseCaseTest {
     private DomainEventRepository repository;
 
     @Test
+    @DisplayName("Validar que un horario se le agregue a un partido de futbol")
     void addScheduleGame(){
 
 
@@ -60,7 +63,7 @@ class AssignScheduleUseCaseTest {
         Assertions.assertEquals("xxx", event.aggregateRootId());
         Assertions.assertEquals("1:00 PM", event.getHour().value());
         Assertions.assertEquals("2021-10-02", event.getDate().value());
-
+        Mockito.verify(repository).getEventsBy(soccerGameID.value());
 
     }
 
