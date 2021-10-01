@@ -1,6 +1,7 @@
 package com.sofka.challenge.SoccerGameDDD.domain.sale;
 
 import co.com.sofka.domain.generic.AggregateEvent;
+import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.challenge.SoccerGameDDD.domain.sale.entities.Customer;
 import com.sofka.challenge.SoccerGameDDD.domain.sale.entities.Invoice;
 import com.sofka.challenge.SoccerGameDDD.domain.sale.entities.Ticket;
@@ -10,6 +11,7 @@ import com.sofka.challenge.SoccerGameDDD.domain.shared.values.Date;
 import com.sofka.challenge.SoccerGameDDD.domain.shared.values.Name;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.SoccerGameIdentity;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -25,6 +27,17 @@ public class Sale extends AggregateEvent<SaleIdentity> {
     public Sale(SaleIdentity saleIdentity, Date date, NumberOfTicketsForSale numberOfTicketsForSale) {
         super(saleIdentity);
         appendChange(new SaleCreated(saleIdentity, date, numberOfTicketsForSale)).apply();
+    }
+
+    private Sale(SaleIdentity saleIdentity){
+        super(saleIdentity);
+        subscribe(new SaleChange(this));
+    }
+
+    public static Sale from(SaleIdentity saleIdentity, List<DomainEvent> events){
+        var sale = new Sale(saleIdentity);
+        events.forEach(sale::applyEvent);
+        return sale;
     }
 
 
@@ -71,5 +84,14 @@ public class Sale extends AggregateEvent<SaleIdentity> {
         appendChange(new NameUpdated(name)).apply();
      }
 
+     public void updatePriceInvoice(Price price){
+        Objects.requireNonNull(price);
+        appendChange(new PriceInvoiceUpdated(price)).apply();
+     }
+
+     public void updateStadiumLocation(StadiumLocation location){
+        Objects.requireNonNull(location);
+        appendChange(new StadiumLocationUpdated(location)).apply();
+     }
 
 }
