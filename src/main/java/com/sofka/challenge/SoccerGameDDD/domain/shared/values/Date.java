@@ -3,8 +3,12 @@ package com.sofka.challenge.SoccerGameDDD.domain.shared.values;
 import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Date implements ValueObject<String> {
+
+    private static final Pattern DATE_PATTERN = Pattern.compile(
+            "^\\d{4}-\\d{2}-\\d{2}$");
 
     private final String value;
 
@@ -15,7 +19,7 @@ public class Date implements ValueObject<String> {
             throw new IllegalArgumentException("La fecha no puede estar vacia");
         }
 
-        if (!this.value.matches("\\d{4}-\\d{2}-\\d{2}")) {
+        if (!DATE_PATTERN.matcher(this.value).matches()) {
             throw new IllegalArgumentException("La fecha no es valida");
         }
     }
