@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-class AssociateStadiumUseCaseTest {
+class AssignStadiumUseCaseTest {
 
     @Mock
     private DomainEventRepository repository;
@@ -41,7 +41,7 @@ class AssociateStadiumUseCaseTest {
                 location
         );
 
-        var useCase= new AssociateStadiumUseCase();
+        var useCase= new AssignStadiumUseCase();
 
         Mockito.when(repository.getEventsBy(soccerGameID.value())).thenReturn(eventStored(soccerGameID,nameTournament));
         useCase.addRepository(repository);
