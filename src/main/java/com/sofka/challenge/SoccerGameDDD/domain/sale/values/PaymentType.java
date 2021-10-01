@@ -1,23 +1,20 @@
-package com.sofka.challenge.SoccerGameDDD.domain.shared.values;
+package com.sofka.challenge.SoccerGameDDD.domain.sale.values;
 
 import co.com.sofka.domain.generic.ValueObject;
 
 import java.util.Objects;
 
-public class Date implements ValueObject<String> {
+public class PaymentType implements ValueObject<String> {
 
     private final String value;
 
-    public Date(String value) {
+    public PaymentType(String value) {
         this.value = Objects.requireNonNull(value);
 
         if(this.value.isBlank()){
-            throw new IllegalArgumentException("La fecha no puede estar vacia");
+            throw new IllegalArgumentException("El metodo de pago no puede estar vacio");
         }
 
-        if (!this.value.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            throw new IllegalArgumentException("La fecha no es valida");
-        }
     }
 
     @Override
@@ -29,8 +26,8 @@ public class Date implements ValueObject<String> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Date date = (Date) o;
-        return Objects.equals(value, date.value);
+        PaymentType that = (PaymentType) o;
+        return Objects.equals(value, that.value);
     }
 
     @Override
