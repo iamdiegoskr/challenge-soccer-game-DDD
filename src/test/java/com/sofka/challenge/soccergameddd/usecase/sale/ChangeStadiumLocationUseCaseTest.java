@@ -71,7 +71,7 @@ class ChangeStadiumLocationUseCaseTest {
         var eventTicketCreated = new TicketAdded(
                 TicketIdentity.of("yyy"),
                 new PaymentType("efectivo"),
-                new StadiumLocation("sur"),
+                new StadiumLocation("norte"),
                 new Price(80000.0)
         );
 
