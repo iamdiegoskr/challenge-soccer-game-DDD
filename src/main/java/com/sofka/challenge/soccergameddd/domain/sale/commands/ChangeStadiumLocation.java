@@ -7,7 +7,7 @@ import com.sofka.challenge.soccergameddd.domain.sale.values.TicketIdentity;
 
 public class ChangeStadiumLocation extends Command {
 
-    private SaleIdentity saleIdentity;
+    private final SaleIdentity saleIdentity;
     private final StadiumLocation stadiumLocation;
     private final TicketIdentity ticketIdentity;
 
