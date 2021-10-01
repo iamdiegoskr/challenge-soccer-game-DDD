@@ -6,9 +6,7 @@ import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.domain.generic.DomainEvent;
 import com.sofka.challenge.SoccerGameDDD.domain.shared.values.Name;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.commands.AddReferee;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.commands.AddTeam;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedReferee;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.AddedTeam;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.events.SoccerGameCreated;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.*;
 import org.junit.jupiter.api.Assertions;
@@ -20,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 @ExtendWith(MockitoExtension.class)
 class AssignRefereeUseCaseTest {
