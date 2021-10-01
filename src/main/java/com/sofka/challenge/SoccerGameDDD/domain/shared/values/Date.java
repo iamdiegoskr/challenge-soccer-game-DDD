@@ -1,4 +1,4 @@
-package com.sofka.challenge.SoccerGameDDD.domain.soccergame.values;
+package com.sofka.challenge.SoccerGameDDD.domain.shared.values;
 
 import co.com.sofka.domain.generic.ValueObject;
 

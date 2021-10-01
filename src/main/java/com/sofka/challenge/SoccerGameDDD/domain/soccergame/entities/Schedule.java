@@ -1,7 +1,7 @@
 package com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities;
 
 import co.com.sofka.domain.generic.Entity;
-import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.Date;
+import com.sofka.challenge.SoccerGameDDD.domain.shared.values.Date;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.Hour;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.values.ScheduleIdentity;
 

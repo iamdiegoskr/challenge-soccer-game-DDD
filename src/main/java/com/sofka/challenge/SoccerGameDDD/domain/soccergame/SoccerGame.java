@@ -2,6 +2,7 @@ package com.sofka.challenge.SoccerGameDDD.domain.soccergame;
 
 import co.com.sofka.domain.generic.AggregateEvent;
 import co.com.sofka.domain.generic.DomainEvent;
+import com.sofka.challenge.SoccerGameDDD.domain.shared.values.Date;
 import com.sofka.challenge.SoccerGameDDD.domain.shared.values.Name;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Referee;
 import com.sofka.challenge.SoccerGameDDD.domain.soccergame.entities.Schedule;
