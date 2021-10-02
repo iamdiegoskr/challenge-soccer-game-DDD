@@ -40,7 +40,7 @@ public class Sale extends AggregateEvent<SaleIdentity> {
         return sale;
     }
 
-    //Pendiente a como crear caso de uso
+
     public void associateSoccerGame(SoccerGameIdentity soccerGameIdentity){
         Objects.requireNonNull(soccerGameIdentity);
         appendChange(new AssociatedGame(soccerGameIdentity)).apply();
