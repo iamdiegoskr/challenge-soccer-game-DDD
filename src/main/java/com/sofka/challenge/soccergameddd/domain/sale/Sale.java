@@ -78,6 +78,10 @@ public class Sale extends AggregateEvent<SaleIdentity> {
         appendChange(new NumberOfTicketsForSaleUpdated(numberOfTicketsForSale)).apply();
      }
 
+     public void notifyNumberOfTickets(String numberTicketsInformation){
+        Objects.requireNonNull(numberTicketsInformation);
+        appendChange(new NumberOfTicketsNotified(numberTicketsInformation)).apply();
+     }
 
      public void updateNameCustomer(Name name){
         Objects.requireNonNull(name);
