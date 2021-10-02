@@ -2,7 +2,6 @@ package com.sofka.challenge.soccergameddd.usecase.sale.usecaseevent;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.repository.DomainEventRepository;
-import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.business.support.TriggeredEvent;
 import com.sofka.challenge.soccergameddd.domain.sale.events.NumberOfTicketsForSaleUpdated;
 import com.sofka.challenge.soccergameddd.domain.sale.events.NumberOfTicketsNotified;
@@ -16,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class NotifyNumberOfTicketsUseCaseTest {
@@ -46,7 +44,7 @@ class NotifyNumberOfTicketsUseCaseTest {
 
         var notification = (NumberOfTicketsNotified) events.get(0);
 
-        Assertions.assertEquals("120000", notification.getNumberOfTickesMessage());
+        Assertions.assertEquals("120000 tickets available", notification.getNumberoftickesmessage());
         Mockito.verify(repository).getEventsBy("xxx");
 
     }

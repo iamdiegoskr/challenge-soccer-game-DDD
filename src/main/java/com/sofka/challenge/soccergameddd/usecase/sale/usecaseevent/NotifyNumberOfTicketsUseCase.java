@@ -16,7 +16,7 @@ public class NotifyNumberOfTicketsUseCase extends UseCase<TriggeredEvent<NumberO
 
         var sale = Sale.from(SaleIdentity.of(event.aggregateRootId()),this.retrieveEvents());
 
-        sale.notifyNumberOfTickets("120000");
+        sale.notifyNumberOfTickets("120000 tickets available");
 
         emit().onResponse(new ResponseEvents(sale.getUncommittedChanges()));
 

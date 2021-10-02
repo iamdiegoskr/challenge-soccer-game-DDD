@@ -4,14 +4,14 @@ import co.com.sofka.domain.generic.DomainEvent;
 
 public class NumberOfTicketsNotified extends DomainEvent {
 
-    private final String numberOfTickesMessage;
+    private final String numberoftickesmessage;
 
-    public NumberOfTicketsNotified(String numberOfTickesMessage) {
+    public NumberOfTicketsNotified(String numberoftickesmessage) {
         super("sofka.sale.numberticktsnotified");
-        this.numberOfTickesMessage = numberOfTickesMessage;
+        this.numberoftickesmessage = numberoftickesmessage;
     }
 
-    public String getNumberOfTickesMessage() {
-        return numberOfTickesMessage;
+    public String getNumberoftickesmessage() {
+        return numberoftickesmessage;
     }
 }
